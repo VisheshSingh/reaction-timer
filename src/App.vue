@@ -1,17 +1,30 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <h1>Ninja Reaction Timer</h1>
+  <button @click="start" :disabled="isPlaying">play</button>
+  <Block v-if="isPlaying" />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Block from './components/Block';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    Block,
+  },
+  data() {
+    return {
+      isPlaying: false,
+      delay: null,
+    };
+  },
+  methods: {
+    start() {
+      this.isPlaying = true;
+      this.delay = 2000 + Math.random() * 5000;
+    },
+  },
+};
 </script>
 
 <style>
@@ -22,5 +35,16 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+button {
+  background: #41b883;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+}
+button:disabled {
+  background: #6d6e6e;
+  cursor: not-allowed;
 }
 </style>
